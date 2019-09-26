@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Text, View, Button } from 'react-native'
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -23,7 +24,7 @@ const TabNavigator = createBottomTabNavigator({
     screen: Tab1,
     navigationOptions: {
       title: 'Tab1',
-     // tabBarIcon: <IconMI name="account-balance" size={25} color='black' />
+      // tabBarIcon: <IconMI name="account-balance" size={25} color='black' />
     }
   },
   Tab2: {
@@ -44,14 +45,15 @@ const TabNavigator = createBottomTabNavigator({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
 
         const { routeName } = navigation.state;
+        let IconComponent = IconMI;
         let iconName;
 
-        console.log('routeName',routeName)
+        console.log('routeName', routeName)
         if (routeName === 'Tab1') {
           iconName = `account-balance`;
           // Sometimes we want to add badges to some icons.
           // You can check the implementation below.
-         // IconComponent = HomeIconWithBadge;
+          IconComponent = HomeIconWithBadge;
         } else if (routeName === 'Tab2') {
           iconName = `account-balance-wallet`;
         }
@@ -60,7 +62,7 @@ const TabNavigator = createBottomTabNavigator({
         }
 
         // You can return any component that you like here!
-        return <IconMI name={iconName} size={25} color={tintColor} />;
+        return <IconComponent name={iconName} size={25} color={tintColor} />;
       },
     }),
     tabBarOptions: {
@@ -68,6 +70,44 @@ const TabNavigator = createBottomTabNavigator({
       inactiveTintColor: 'gray',
     },
   });
+
+
+class IconWithBadge extends React.Component {
+  render() {
+    const { name, badgeCount, color, size } = this.props;
+    return (
+      <View style={{ width: 24, height: 24, margin: 5 }}>
+        <IconMI name={name} size={size} color={color} />
+        {badgeCount > 0 && (
+          <View
+            style={{
+              // If you're using react-native < 0.57 overflow outside of parent
+              // will not work on Android, see https://git.io/fhLJ8
+              position: 'absolute',
+              right: -6,
+              top: -3,
+              backgroundColor: 'red',
+              borderRadius: 6,
+              width: 12,
+              height: 12,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
+              {badgeCount}
+            </Text>
+          </View>
+        )}
+      </View>
+    );
+  }
+}
+
+const HomeIconWithBadge = props => {
+  // You should pass down the badgeCount in some other ways like react context api, redux, mobx or event emitters.
+  return <IconWithBadge {...props} badgeCount={3} />;
+};
 
 const AppStack = createStackNavigator({
   Home: {
