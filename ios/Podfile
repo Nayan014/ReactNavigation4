@@ -36,6 +36,8 @@ target 'ReactNavigation4' do
 
   pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'ReactNavigation4Tests' do
     inherit! :search_paths
     # Pods for testing
