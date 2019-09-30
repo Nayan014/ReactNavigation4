@@ -3,7 +3,7 @@ import { Text, View, Button } from 'react-native'
 
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation-tabs';
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
 
@@ -18,8 +18,28 @@ import Tab3 from './Tabs/Tab3';
 // Icon
 import IconMI from 'react-native-vector-icons/MaterialIcons';
 
+const TopTabNavigator = createMaterialTopTabNavigator({
+  Tab1: {
+    screen: Tab1,
+    navigationOptions: {
+      title: 'Tab1',
+    }
+  },
+  Tab2: {
+    screen: Tab2,
+    navigationOptions: {
+      title: 'Tab2',
+    }
+  },
+  Tab3: {
+    screen: Tab3,
+    navigationOptions: {
+      title: 'Tab3',
+    }
+  }
+});
 
-const TabNavigator = createBottomTabNavigator({
+const BottomTabNavigator = createBottomTabNavigator({
   Tab1: {
     screen: Tab1,
     navigationOptions: {
@@ -48,7 +68,6 @@ const TabNavigator = createBottomTabNavigator({
         let IconComponent = IconMI;
         let iconName;
 
-        console.log('routeName', routeName)
         if (routeName === 'Tab1') {
           iconName = `account-balance`;
           // Sometimes we want to add badges to some icons.
@@ -116,10 +135,16 @@ const AppStack = createStackNavigator({
       title: 'Home',
     }
   },
-  Tabs: {
-    screen: TabNavigator,
+  BottomTabs: {
+    screen: BottomTabNavigator,
     navigationOptions: {
       title: 'Tabs',
+    }
+  },
+  TopTabs: {
+    screen: TopTabNavigator,
+    navigationOptions: {
+      title: 'Top Tabs',
     }
   }
 });

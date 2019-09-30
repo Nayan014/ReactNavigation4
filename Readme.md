@@ -9,6 +9,8 @@
 - Bottom Tab with Icon added
 - Add badges to icons
 
+- [l3]
+- Top Tab
 
 # Plugin
 

@@ -9,9 +9,17 @@ export default class HomeScreen extends Component {
 
                     <View>
                         <Button
-                            title="Tabs Page"
+                            title="Bottom Tabs"
                             color="green"
-                            onPress={() => this.props.navigation.navigate('Tabs')}
+                            onPress={() => this.props.navigation.navigate('BottomTabs')}
+                        />
+                    </View>
+
+                    <View style={{ paddingTop: 10 }}>
+                        <Button
+                            title="Top Tabs"
+                            color="blue"
+                            onPress={() => this.props.navigation.navigate('TopTabs')}
                         />
                     </View>
 
